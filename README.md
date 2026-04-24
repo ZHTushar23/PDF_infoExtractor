@@ -17,17 +17,30 @@ Extract information from PDF files, store as JSON/YAML, and chat about the conte
 
 ## Installation
 
-### 1. Clone / download the project
+### 1. Clone the repository
 
 ```bash
-cd G:\Claude_Code
+git clone https://github.com/zhtushar23/pdf_infoEaxtractor.git
+cd pdf-infoExtractor
 ```
 
-### 2. Create and activate a conda environment
+### 2. Create and activate a virtual environment
+
+**Using conda:**
 
 ```bash
-conda create --prefix G:\Claude_Code\env python=3.11
-conda activate G:\Claude_Code\env
+conda create -n pdf-chatbot python=3.11
+conda activate pdf-chatbot
+```
+
+**Or using venv:**
+
+```bash
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# macOS / Linux
+source .venv/bin/activate
 ```
 
 ### 3. Install Python dependencies
@@ -60,10 +73,10 @@ Install two system-level binaries:
 
 | Tool | Download |
 |---|---|
-| **Tesseract** | https://github.com/UB-Mannheim/tesseract/wiki |
-| **Poppler** | https://github.com/oschwartz10612/poppler-windows/releases |
+| **Tesseract** | https://github.com/UB-Mannheim/tesseract/wiki (Windows) · `brew install tesseract` (macOS) · `apt install tesseract-ocr` (Linux) |
+| **Poppler** | https://github.com/oschwartz10612/poppler-windows/releases (Windows) · `brew install poppler` (macOS) · `apt install poppler-utils` (Linux) |
 
-After installing, add both to your system `PATH`:
+After installing on Windows, add both to your system `PATH`:
 
 ```
 C:\Program Files\Tesseract-OCR
@@ -80,25 +93,13 @@ pdftoppm -v
 
 ## VS Code Setup
 
-### Select the conda interpreter
+### Select the interpreter
 
-`Ctrl+Shift+P` → **Python: Select Interpreter** → choose `G:\Claude_Code\env`
+`Ctrl+Shift+P` → **Python: Select Interpreter** → choose the environment you created above.
 
-### Enable conda in the VS Code terminal
+### Enable conda in the VS Code terminal (Windows)
 
-Add to `.vscode/settings.json`:
-
-```json
-{
-  "python.defaultInterpreterPath": "G:\\Claude_Code\\env\\python.exe",
-  "python.terminal.activateEnvironment": true,
-  "terminal.integrated.env.windows": {
-    "PATH": "C:\\Users\\YourName\\anaconda3;C:\\Users\\YourName\\anaconda3\\Scripts;C:\\Users\\YourName\\anaconda3\\Library\\bin;${env:PATH}"
-  }
-}
-```
-
-Or initialize conda for PowerShell (run once in Anaconda Prompt):
+Run once in Anaconda Prompt, then restart VS Code:
 
 ```powershell
 conda init powershell
@@ -158,9 +159,9 @@ python main.py edit pdf_data/report.json
 | `set metadata.title "New Title"` | Update a value |
 | `set content.0.text "corrected text"` | Edit page text |
 | `del content.2.tables.0` | Delete a key or list item |
-| `add metadata.tags ["research","UMN"]` | Add a new field (JSON value) |
+| `add metadata.tags ["research","tag2"]` | Add a new field (JSON value) |
 | `list` | List all leaf key paths |
-| `search university` | Search keys and values |
+| `search keyword` | Search keys and values |
 | `undo` | Undo last change |
 | `history` | Show change history |
 | `save` | Save to current file |
@@ -219,7 +220,7 @@ python main.py convert pdf_data/report.yaml --to json
 {
   "metadata": {
     "filename": "report.pdf",
-    "filepath": "C:/path/to/report.pdf",
+    "filepath": "/path/to/report.pdf",
     "extracted_at": "2026-04-19T12:00:00",
     "pages": 10,
     "method": "text | ocr | mixed (3/10 pages OCR)",
@@ -263,7 +264,7 @@ python main.py convert pdf_data/report.yaml --to json
 ## Project Structure
 
 ```
-PDF_infoExtractor
+pdf_infoExtractor/
 ├── main.py                  # CLI entry point
 ├── requirements.txt         # Python dependencies
 ├── README.md                # This file
@@ -278,3 +279,9 @@ PDF_infoExtractor
     ├── report.json
     └── report.yaml
 ```
+
+---
+
+## License
+
+MIT
