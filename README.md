@@ -1,4 +1,4 @@
-# PDF Chatbot
+# PDF Information Extractor
 
 Extract information from PDF files, store as JSON/YAML, and chat about the content using a **free local LLM — no API key required**.
 
@@ -263,7 +263,7 @@ python main.py convert pdf_data/report.yaml --to json
 ## Project Structure
 
 ```
-G:\Claude_Code\
+PDF_infoExtractor
 ├── main.py                  # CLI entry point
 ├── requirements.txt         # Python dependencies
 ├── README.md                # This file
