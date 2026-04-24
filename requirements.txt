@@ -1,0 +1,19 @@
+# PDF extraction
+pdfplumber>=0.11.0
+
+# OCR (for scanned / image-only PDFs)
+pdf2image>=1.17.0        # also needs Poppler binaries on Windows
+pytesseract>=0.3.13      # also needs Tesseract installed on Windows
+Pillow>=10.0.0
+
+# Data formats
+pyyaml>=6.0.0
+
+# Ollama client (local LLM — no API key)
+ollama>=0.1.0
+
+# Nice terminal output
+rich>=13.0.0
+
+# Optional .env support
+python-dotenv>=1.0.0

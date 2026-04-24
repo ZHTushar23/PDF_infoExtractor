@@ -1,0 +1,76 @@
+## Ollama Windows Startup (My Setup)
+
+I use Ollama on a custom port because Windows blocks the default 11434.
+
+### Start Ollama server
+
+Open PowerShell and run:
+
+```powershell
+$env:OLLAMA_HOST="127.0.0.1:13000"
+ollama serve
+```
+
+Leave this window open while using models.
+
+---
+
+### Use Ollama in another terminal
+
+Before running any commands, set the same host:
+
+```powershell
+$env:OLLAMA_HOST="127.0.0.1:13000"
+ollama list
+```
+
+Run models:
+
+```powershell
+ollama run llama3
+```
+
+---
+
+### Use Ollama in Python (Anaconda)
+set the environment variable. 
+$env:OLLAMA_HOST="127.0.0.1:13000"
+
+check if its set:
+echo $env:OLLAMA_HOST
+
+Always point to the same port:
+
+```python
+import requests
+
+r = requests.post(
+    "http://127.0.0.1:13000/api/generate",
+    json={
+        "model": "llama3",
+        "prompt": "Hello",
+        "stream": False
+    }
+)
+
+print(r.json()["response"])
+```
+
+---
+
+### Important rule
+
+* Always use `127.0.0.1:13000`
+* Never use default `11434` on this machine
+
+---
+
+### Optional (recommended)
+
+To avoid setting the port every time, permanently save it:
+
+```powershell
+setx OLLAMA_HOST "127.0.0.1:13000"
+```
+
+Then restart terminal.
